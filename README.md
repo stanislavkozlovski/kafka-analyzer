@@ -78,16 +78,14 @@ npx superstream-kafka-analyzer --config config.json
 ```json
 {
   "kafka": {
-    "bootstrap_servers": "localhost:9092",
+    "brokers": ["localhost:9092"],
     "clientId": "superstream-analyzer",
-    "vendor": "apache",
     "useSasl": false
   },
   "file": {
     "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
   },
   "email": "user@example.com"
 }
@@ -97,9 +95,8 @@ npx superstream-kafka-analyzer --config config.json
 ```json
 {
   "kafka": {
-    "bootstrap_servers": ["kafka1.example.com:9092", "kafka2.example.com:9092", "kafka3.example.com:9092"],
+    "brokers": ["kafka1.example.com:9092", "kafka2.example.com:9092", "kafka3.example.com:9092"],
     "clientId": "superstream-analyzer",
-    "vendor": "apache",
     "useSasl": true,
     "sasl": {
       "mechanism": "PLAIN",
@@ -109,33 +106,8 @@ npx superstream-kafka-analyzer --config config.json
   },
   "file": {
     "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
-  },
-  "email": "user@example.com"
-}
-```
-
-**AWS MSK with SCRAM** (`config.example.aws-msk.json`):
-```json
-{
-  "kafka": {
-    "bootstrap_servers": ["b-1.your-cluster.abc123.c2.kafka.us-east-1.amazonaws.com:9092"],
-    "clientId": "superstream-analyzer",
-    "vendor": "aws-msk",
-    "useSasl": true,
-    "sasl": {
-      "mechanism": "SCRAM-SHA-512",
-      "username": "your-msk-username",
-      "password": "your-msk-password"
-    }
-  },
-  "file": {
-    "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
   },
   "email": "user@example.com"
 }
@@ -145,7 +117,7 @@ npx superstream-kafka-analyzer --config config.json
 ```json
 {
   "kafka": {
-    "bootstrap_servers": ["b-1.your-cluster.abc123.c2.kafka.us-east-1.amazonaws.com:9198"],
+    "brokers": ["b-1.your-cluster.abc123.c2.kafka.us-east-1.amazonaws.com:9198"],
     "clientId": "superstream-analyzer",
     "vendor": "aws-msk",
     "useSasl": true,
@@ -155,9 +127,31 @@ npx superstream-kafka-analyzer --config config.json
   },
   "file": {
     "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
+  },
+  "email": "user@example.com"
+}
+```
+
+**AWS MSK with SCRAM** (`config.example.aws-msk-scram.json`):
+```json
+{
+  "kafka": {
+    "brokers": ["b-1.your-cluster.abc123.c2.kafka.us-east-1.amazonaws.com:9096"],
+    "clientId": "superstream-analyzer",
+    "vendor": "aws-msk",
+    "useSasl": true,
+    "sasl": {
+      "mechanism": "scram-sha-512",
+      "username": "your-msk-username",
+      "password": "your-msk-password"
+    }
+  },
+  "file": {
+    "outputDir": "./kafka-analysis",
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
   },
   "email": "user@example.com"
 }
@@ -167,21 +161,19 @@ npx superstream-kafka-analyzer --config config.json
 ```json
 {
   "kafka": {
-    "bootstrap_servers": ["pkc-xxxxx.region.cloud:9092"],
+    "brokers": ["pkc-xxxxx.us-central1.gcp.confluent.cloud:9092"],
     "clientId": "superstream-analyzer",
-    "vendor": "confluent-cloud",
     "useSasl": true,
     "sasl": {
-      "mechanism": "PLAIN",
-      "username": "your-api-key",
-      "password": "your-api-secret"
+      "mechanism": "plain",
+      "username": "YOUR_API_KEY",
+      "password": "YOUR_API_SECRET"
     }
   },
   "file": {
     "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
   },
   "email": "user@example.com"
 }
@@ -191,21 +183,61 @@ npx superstream-kafka-analyzer --config config.json
 ```json
 {
   "kafka": {
-    "bootstrap_servers": ["your-aiven-cluster.aivencloud.com:12345"],
+    "brokers": ["your-aiven-cluster.aivencloud.com:12345"],
     "clientId": "superstream-analyzer",
     "vendor": "aiven",
     "useSasl": true,
     "sasl": {
-      "mechanism": "SCRAM-SHA-256",
+      "mechanism": "scram-sha-256",
       "username": "your-username",
       "password": "your-password"
     }
   },
   "file": {
     "outputDir": "./kafka-analysis",
-    "formats": ["html"],
-    "includeMetadata": true,
-    "includeTimestamp": true
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
+  },
+  "email": "user@example.com"
+}
+```
+
+**Confluent Platform** (`config.example.confluent-platform.json`):
+```json
+{
+  "kafka": {
+    "brokers": ["kafka1.company.com:9092", "kafka2.company.com:9092"],
+    "clientId": "superstream-analyzer",
+    "vendor": "confluent-platform",
+    "useSasl": true,
+    "sasl": {
+      "mechanism": "plain",
+      "username": "your-username",
+      "password": "your-password"
+    }
+  },
+  "file": {
+    "outputDir": "./kafka-analysis",
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
+  },
+  "email": "user@example.com"
+}
+```
+
+**Redpanda** (`config.example.redpanda.json`):
+```json
+{
+  "kafka": {
+    "brokers": ["redpanda1.company.com:9092", "redpanda2.company.com:9092"],
+    "clientId": "superstream-analyzer",
+    "vendor": "redpanda",
+    "useSasl": false
+  },
+  "file": {
+    "outputDir": "./kafka-analysis",
+    "formats": ["json", "csv", "html", "txt"],
+    "includeMetadata": true
   },
   "email": "user@example.com"
 }
@@ -485,10 +517,11 @@ The tool includes comprehensive validation that will:
 ### Kafka Configuration
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `bootstrap_servers` | string | Yes | Comma-separated list of Kafka bootstrap servers |
+| `brokers` | array | Yes | Array of Kafka bootstrap servers |
 | `clientId` | string | Yes | Client identifier for Kafka connection |
+| `vendor` | string | No | Kafka vendor (aws-msk, confluent-cloud, aiven, etc.) |
 | `useSasl` | boolean | No | Enable SASL authentication |
-| `sasl.mechanism` | string | No* | SASL mechanism (PLAIN, SCRAM-SHA-256, SCRAM-SHA-512) |
+| `sasl.mechanism` | string | No* | SASL mechanism (plain, scram-sha-256, scram-sha-512, oauthbearer) |
 | `sasl.username` | string | No* | SASL username |
 | `sasl.password` | string | No* | SASL password |
 
@@ -500,6 +533,11 @@ The tool includes comprehensive validation that will:
 | `outputDir` | string | Yes | Directory for output files |
 | `formats` | array | Yes | Array of output formats (json, csv, html, txt) |
 | `includeMetadata` | boolean | No | Include metadata in output files |
+
+### Email Configuration
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `email` | string | No | Email address for generating report files. If not provided, no file output will be generated |
 
 ## 🚨 Troubleshooting
 
