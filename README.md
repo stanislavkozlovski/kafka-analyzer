@@ -74,6 +74,21 @@ npx superstream-kafka-analyzer --config config.json
 
 ### Configuration File Examples
 
+**Available Examples:**
+- [Basic Configuration](config-examples/config.example.json) - Simple localhost setup
+- [SASL Authentication](config-examples/config.example.sasl.json) - Generic SASL setup
+- [Apache Kafka](config-examples/config.example.apache-kafka.json) - Apache Kafka with SASL
+- [Apache Kafka (Plaintext)](config-examples/config.example.apache-kafka-plaintext.json) - Apache Kafka without authentication
+- [Apache Kafka (SCRAM)](config-examples/config.example.apache-kafka-scram.json) - Apache Kafka with SCRAM authentication
+- [AWS MSK (IAM)](config-examples/config.example.aws-msk-iam.json) - AWS MSK with IAM authentication
+- [AWS MSK (SCRAM)](config-examples/config.example.aws-msk.json) - AWS MSK with SCRAM authentication
+- [Confluent Cloud](config-examples/config.example.confluent-cloud.json) - Confluent Cloud setup
+- [Confluent Platform](config-examples/config.example.confluent-platform.json) - Confluent Platform setup
+- [Aiven Kafka](config-examples/config.example.aiven-kafka.json) - Aiven Kafka setup
+- [Redpanda](config-examples/config.example.redpanda.json) - Redpanda setup
+- [With Timestamp](config-examples/config.example.with-timestamp.json) - Include timestamp in filenames
+- [Without Timestamp](config-examples/config.example.without-timestamp.json) - No timestamp in filenames
+
 **Basic Configuration** (`config.example.json`):
 ```json
 {
